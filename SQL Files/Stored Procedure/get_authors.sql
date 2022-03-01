@@ -1,0 +1,7 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_authors`(IN bIdIn INT)
+    SQL SECURITY INVOKER
+BEGIN
+	SELECT	T_WRITES.aId, name, birthdate, uId
+    FROM	T_AUTHOR, T_WRITES
+    WHERE	T_WRITES.bId = bIdIn AND T_WRITES.aId = T_AUTHOR.aId;
+END

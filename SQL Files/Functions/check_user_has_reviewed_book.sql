@@ -1,0 +1,9 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `check_user_has_reviewed_book`(bIdIn INT, uIdIn INT) RETURNS tinyint(1)
+    READS SQL DATA
+    SQL SECURITY INVOKER
+BEGIN
+	IF EXISTS(SELECT * FROM	T_REVIEW WHERE bId = bIdIn AND uId = uIdIn)
+		THEN RETURN TRUE;
+		ELSE RETURN FALSE;
+    END IF;
+END

@@ -1,0 +1,10 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `check_dup_username`(usernameIn VARCHAR(60)) RETURNS tinyint(1)
+    READS SQL DATA
+    SQL SECURITY INVOKER
+BEGIN
+	IF EXISTS(SELECT * FROM	T_USER WHERE UPPER(username) = UPPER(usernameIn))
+		THEN RETURN FALSE;
+		ELSE RETURN TRUE;
+    END IF;
+    
+END
